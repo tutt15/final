@@ -10,15 +10,11 @@
                     <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
                 </div>
 
-                <span class="topbar-child1">
-                    Free shipping for standard order over 100.000
-                </span>
-
                 <div class="topbar-child2">
                     <ul>
                         @if(Auth::check())
                         <li>
-                            <a href="">Chào {{Auth::user()->name}}</a>
+                            <a href="{{ route('logout') }}">Chào {{Auth::user()->name}}</a>
                         </li>
                         @endif
                    </ul>
@@ -70,7 +66,7 @@
                 <div class="header-icons">
                    <ul>
                         <li>
-                            <a href="{{route('login')}}">Đăng nhập</a>
+                            <a href="{{route('loginn')}}">Đăng nhập</a>
                         </li>
                         
                    </ul>

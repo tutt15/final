@@ -4,7 +4,7 @@
         <div class="card card-container">
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin" action="{{route('login')}}" method="post">
+            <form class="form-signin" action="{{route('loginn')}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 @if(Session::has('flag'))
                 <div class="alert alert-{{Session::get('flag')}}">{{Session::get('message')}}</div>

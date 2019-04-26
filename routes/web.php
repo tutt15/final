@@ -11,96 +11,54 @@
 |
 */
 
-Route::get('/',[
-	'as'   => 'home',
-	'uses' => 'PageController@getIndex'
+Route::get('/',['as'=> 'home','uses'=>'PageController@getIndex']);
+
+Route::get('/product',['as'=>'product','uses'=>'PageController@getProduct']);
+
+Route::get('/producttype/{type}',['as'=>'producttype','uses' =>'PageController@getProductType']);
+
+Route::get('/productdetail/{id}',['as'=>'productdetail','uses'=>'PageController@getProductDetail']);
+
+Route::get('/loginn',['as'       =>'loginn','uses' =>'PageController@getLogin']);
+Route::post('loginn',['as'       => 'loginn','uses'=>'PageController@postLogin']);
+Route::get('/register',['as'     => 'register','uses'=>'PageController@getRegister']);
+Route::post('/register',['as'    => 'register','uses'=>'PageController@postRegister']);
+Route::get('/logout', ['as'       => 'logout','uses'=>'PageController@getLogout']);
+Route::get('/addcart/{id}',['as' => 'addcart','uses'=>'CartController@getAddtoCart'
 ]);
 
-Route::get('/product',[
-	'as'   => 'product',
-	'uses' => 'PageController@getProduct'
-]);
-
-Route::get('/producttype/{type}',[
-	'as'   => 'producttype',
-	'uses' => 'PageController@getProductType'
-]);
-
-Route::get('/productdetail/{id}',[
-	'as'   => 'productdetail',
-	'uses' => 'PageController@getProductDetail'
-]);
-
-Route::get('/login',[
-	'as'   => 'login',
-	'uses' => 'PageController@getLogin'
-]);
-Route::post('login',[
-	'as'   => 'register',
-	'uses' => 'PageController@postLogin'
-]);
-Route::get('/register',[
-	'as'   => 'register',
-	'uses' => 'PageController@getRegister'
-]);
-
-Route::post('/register',[
-	'as'   => 'register',
-	'uses' => 'PageController@postRegister'
-]);
-Route::get('/addcart/{id}',[
-	'as'   => 'addcart',
-	'uses' => 'CartController@getAddtoCart'
-]);
-
-Route::get('/cart',[
-	'as'   => 'cart',
-	'uses' => 'CartController@show'
-]);
+Route::get('/cart',['as'=>'cart','uses'=>'CartController@show']);
 
 //  add cart nit
-Route::get('/addcartaj',['as'   => 'addcartaj',
-	'uses' => 'CartAjController@getAddtoCart'
+Route::get('/addcartaj',['as'=>'addcartaj','uses'=>'CartAjController@getAddtoCart'
 ]);
-Route::get('showcart',[	'as'=> 'showcart',	'uses' => 'CartAjController@getShowCart']);
-Route::delete('/cart/{id}', 'CartAjController@destroy')->name('cart.destroy');
+Route::get('/updatecart/{id}',['as'=>'updatecart','uses'=>'CartAjController@getUpdateCart'
+]);
+Route::get('showcart',['as'=>'showcart','uses'=>'CartAjController@getShowCart']);
+Route::delete('/cart/{id}','CartAjController@destroy')->name('cart.destroy');
 
-Route::get('bills',[
-	'as'   => 'bills',
-	'uses' => 'CartAjController@getShowBill'
-]);
+Route::get('bills',['as'=>'bills','uses' => 'CartAjController@getShowBill']);
 
 Route::post('/bills', ['as'=>'bills','uses'=>'CartAjController@postCheckOut']);
 
 Route::get('/contact', 'PageController@getContact');
 Route::post('/contact', ['as'=>'contact','uses'=>'PageController@postContact']);
 
-Route::get('/about',[
-	'as'   => 'about',
-	'uses' => 'PageController@getAbout'
+Route::get('/about',['as'=>'about','uses' => 'PageController@getAbout']);
+
+Route::get('/blog',['as'=>'blog','uses'=>'PageController@getBlog']);
+
+Route::get('/blogdetail/{id?}',['as'=> 'blogdetail','uses' => 'PageController@getBlogSingle']);
+
+Route::get('/search',['as'=>'search','uses' =>'PageController@getSearch'
 ]);
 
-Route::get('/blog',[
-	'as'   => 'blog',
-	'uses' => 'PageController@getBlog'
-]);
-
-Route::get('/blogdetail/{id?}',[
-	'as'   => 'blogdetail',
-	'uses' => 'PageController@getBlogSingle'
-]);
-
-Route::get('/search',[
-	'as'   => 'search',
-	'uses' => 'PageController@getSearch'
-]);
-
-
+Route::post('/comment/{id}',['as'=>'comment', 'uses'=>'CommentController@postComment']);
 
 ///Admin
-Route::get('/admin', 'PageController@getShowAdmin')->name('admin');
 
-Route::get('/ad', 'PageController@getAdmin')->name('ad');
+Route::get('/ad', 'PageController@getLoginAdmin')->name('ad');
+Route::post('/homepage', 'PageController@getAdmin')->name('homepage');
 
 ///Loại sản phẩm
 Route::get('ad/productType', 'ProductTypeController@index')->name('productType.index');

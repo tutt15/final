@@ -6,11 +6,11 @@
     <thead class="thead-light">
       <tr>
         <th>#</th>
-        <th class="w-10">Tên</th>
-        <th class="w-25">Mô tả</th>
-        <th class="width-10">Thêm</th>
-        <th class="width-10">Sửa</th>
-        <th class="width-10">Xóa</th>
+        <th class="w-10">Name</th>
+        <th class="w-25">Description</th>
+        <th class="width-10">Add</th>
+        <th class="width-10">Edit</th>
+        <th class="width-10">Delete</th>
       </tr>
     </thead>
     <tbody>

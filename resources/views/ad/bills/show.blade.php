@@ -20,27 +20,27 @@
                 <tbody>
                     <tr>
                         <td> Họ tên </td>
-                        <td> {{$bill->user->name}} </td>
+                        <td> {{ $bill->user->name }} </td>
                     </tr>
                     <tr>
                         <td> Địa chỉ email </td>
-                        <td> {{$bill->user->email}} </td>
+                        <td> {{ $bill->user->email }} </td>
                     </tr>
                     <tr>
                         <td> Số điện thoại </td>
-                        <td> {{$bill->user->phone_number}} </td>
+                        <td> {{ $bill->user->phone_number }} </td>
                     </tr>
                     <tr>
                         <td> Địa chỉ </td>
-                        <td> {{$bill->user->address}} </td>
+                        <td> {{ $bill->user->address }} </td>
                     </tr>
                     <tr>
                         <td> Note </td>
-                        <td> {{$bill->user->note}} </td>
+                        <td> {{ $bill->user->note }} </td>
                     </tr>
                     <tr>
                         <td> Ngày đặt hàng  </td>
-                        <td> {{$bill->date_order}} </td>
+                        <td> {{ $bill->date_order }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -59,10 +59,10 @@
 
             @foreach($bill->products as $pr)
             <tr>
-                <td> {{$pr->id}} </td>
-                <td> {{$pr->name}} </td>
-                <td> {{$pr->pivot->quantity}} </td>
-                <td> {{$pr->pivot->price}} </td> 
+                <td> {{ $pr->id }} </td>
+                <td> {{ $pr->name }} </td>
+                <td> {{ $pr->pivot->quantity }} </td>
+                <td> {{ $pr->pivot->price }} </td> 
             </tr>
             @endforeach
             <tr>

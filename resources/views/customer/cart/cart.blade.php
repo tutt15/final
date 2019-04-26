@@ -15,6 +15,13 @@ $items = Cart::content();
 
             <span class="header-cart-item-info">
                 {{ $item->qty }} x {{ $item->name }}
+                <div>
+                    <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="cart-options" ><i class="fa fa-trash-o"></i></button>
+                </form>
+                </div>
             </span>
         </div>
     </li>
@@ -37,7 +44,7 @@ $items = Cart::content();
 
     <div class="header-cart-wrapbtn">
         <!-- Button -->
-        <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+        <a href="{{ route('bills') }}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
             Check Out
         </a>
     </div>

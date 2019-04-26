@@ -27,14 +27,14 @@
                         <td> {{$t->image}} </td>
                         <td> {{$t->new}} </td>
                         <td >
-                            <a href="{{route('news.edit', $t->id)}}" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Edit</a>      
+                            <a href="{{route('news.edit', $t->id)}}" title="" class="btn btn-primary"><i class="fa fa-edit "></i></a>      
                         </td>
                         <td >
                            <form action="{{route('news.destroy', $t->id)}}" method="POST">
                             {{csrf_field()}}
                                 <input type='hidden' value='DELETE' name='_method' method="POST">
 
-                                <button type="submit" class='btn btn-danger'> <i class="fa fa-times-circle"></i>Xóa</button> 
+                                <button type="submit" class='btn btn-danger'> <i class="fa fa-times-circle"></i></button> 
                         </form>     
                         </td>
                     </tr>

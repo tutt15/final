@@ -29,6 +29,13 @@ class CartAjController extends Controller
     	return view('customer.cart.cart');
     }
 
+    public function getUpdateCart(Request $request ){
+         $rowId = Input::get('rowid');
+         $qty   = Input::get('qty-n');
+         Cart::update($rowId, $qty);
+         return redirect()->back();
+
+    }
      public function getShowCart(Request $request)
     {
         $type_home = ProductType::all();
@@ -63,11 +70,7 @@ class CartAjController extends Controller
         
         $validator = Validator::make(Input::all(), $rule);
         
-        // if ($validator->fails()) {
-        //     return redirect('bills')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
+       
         
         try {
             // save

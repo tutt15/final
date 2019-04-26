@@ -118,12 +118,22 @@
 										</a>
 
 										<div class="block2-btn-addcart w-size1 trans-0-4">
-											<!-- Button -->
-											
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $new->id }}">
-											Add to Cart
-										</button>
-											
+											@if(Auth::check())
+												@if($new->status == 'Còn')
+													<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $new->id }}">
+														Add to Cart
+													</button>
+			                    					@elseif($new->status =='Hết')
+			                    					<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" >
+														Hết hàng
+													</button>
+												@endif
+											@else	
+												<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"> 
+		                       						 <a href="{{ route('loginn') }}">Add to cart </a> 
+		                    					</button>
+			                    				
+											@endif
 										</div>
 									</div>
 								</div>

@@ -37,15 +37,15 @@
 							<td class="column-3">{{ number_format($item->price) }}</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
-									<a href="" class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-									</a>
+									<button  class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+										<a class="cart_quantity_up" href=''><i class="fs-12 fa fa-minus" aria-hidden="true"></i></a>
+									</button>
 									
 									<input class="size8 m-text18 t-center num-product" data-id="{{ $item->rowId }}" type="number" name="num-product1" value="{{ $item->qty }}">
 
-									<a class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" value="">
-										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-									</a>
+									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" role="{{ $item->id }}" value="" >
+										<a class="cart_quantity_down" href='{{ route("updatecart",$item->rowId) }}'><i class="fs-12 fa fa-plus" aria-hidden="true"></i></a>
+									</button>
 								</div>
 								
 							</td>
@@ -59,13 +59,15 @@
                             	</form>
 								</div>
 							</td>
+							<input type="hidden" name="rowId" />
+
 							
 						</tr>
 						@endforeach
 					</table>
 				</div>
 			</div>
-
+		</div>
 			<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
 				<div class="flex-w flex-m w-full-sm">
 					<div class="size11 bo4 m-r-10">
@@ -82,8 +84,9 @@
 				 
 				<div class="btn-update-cart size10 trans-0-4 m-t-10 m-b-10">
 					<!-- Button -->
-					<button class=" flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" ">
-						Update Cart
+
+					<button class=" flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" >
+						<a href="">Update Cart</a> 
 					</button>
 				</div>
 			</div>

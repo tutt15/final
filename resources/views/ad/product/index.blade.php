@@ -2,7 +2,7 @@
 @section('content')
     
 <div class="container-fluid Admin_Size_content">
-    <a href="{{route('product.create')}}" class="btn btn-success" style="float: right;"><i class="fa fa-plus-circle"></i>Thêm</a>
+    <a href="{{route('product.create')}}" class="btn btn-success" style="float: right;"><i class="fa fa-plus-circle"></i></a>
     <h3 >SẢN PHẨM</h3>
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -22,9 +22,9 @@
                 <th> Promotion_price </th>
                 <th> Image</th>
                 <th> Status </th>
-                <th> Xem </th>
-                <th> Sửa </th>
-                <th> Xóa </th>
+                <th> Show </th>
+                <th> Edit </th>
+                <th> Delete </th>
             </tr>
         </thead>
         <tbody>

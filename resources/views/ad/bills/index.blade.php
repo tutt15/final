@@ -31,12 +31,11 @@
                     <div class="d-flex flex-row justify-content-center">
                         <form action="{{route('bills.show', $bill->id)}}" method="GET">
                             <button class='btn btn-danger ml-2'> <i class="far fa-eye"></i> </button>
-                        </form>
-                            
-                        </div> 
-                    </td> 
-                </tr>
-                @endforeach
+                        </form> 
+                    </div> 
+                </td> 
+            </tr>
+            @endforeach
                 
             </tbody>
         </table>

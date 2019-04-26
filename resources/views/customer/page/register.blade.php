@@ -76,7 +76,7 @@
                             <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                         </div>
                         <div class="login-register">
-                            <a href="{{route('login')}}">Login</a>
+                            <a href="{{route('loginn')}}">Login</a>
                         </div>
                     </form>
                 </div>

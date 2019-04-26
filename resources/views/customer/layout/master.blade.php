@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="{{asset('')}}"> 
   <link href="code/css/bootstrap.min.css" rel="stylesheet">
-    <link href="code/css/font-awesome.min.css" rel="stylesheet">
-    <link href="code/css/prettyPhoto.css" rel="stylesheet">
-    <link href="code/css/price-range.css" rel="stylesheet">
-    <link href="code/css/animate.css" rel="stylesheet">
+  <link href="code/css/font-awesome.min.css" rel="stylesheet">
+  <link href="code/css/prettyPhoto.css" rel="stylesheet">
+  <link href="code/css/price-range.css" rel="stylesheet">
+  <link href="code/css/animate.css" rel="stylesheet">
   <link href="code/css/main.css" rel="stylesheet">
   <link href="code/css/responsive.css" rel="stylesheet">
+  <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <!--===============================================================================================-->
   <link rel="icon" type="image/png" href="code/images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -119,6 +120,29 @@
         
         });
     });
+    $('.btn-num-product-up').each(function(){
+      var nameProduct = $(this).parent().parent().parent().find('.products').html();
+      $(this).on('click', function(){
+        var pro_id = $(this).find('button').attr('role');
+        $.ajax
+        ({
+            url: '/addcartaj',
+            // type: 'POST',              
+            data: {
+                "pro_id": pro_id,
+            },
+            success: function(result)
+            {
+              $('.cart-product').html(result);
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+        
+        });
+    });
 
     $('.block2-btn-addwishlist').each(function(){
       var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -181,6 +205,7 @@
     });
   </script>
   
- 
+
+
 </body>
 </html>

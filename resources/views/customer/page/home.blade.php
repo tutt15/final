@@ -93,13 +93,19 @@
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										@if(Auth::check())
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $index->id }}">
-											Add to Cart
-										</button>
-                    					@else	
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"> 
-                       						 <a href="{{route('login')}}">Add to cart <i class="fas fa-shopping-cart text-white"></i> </a> 
-                    					</button>
+											@if($index->status == 'Còn')
+												<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $index->id }}">
+													Add to Cart
+												</button>
+		                    					@elseif($index->status =='Hết')
+		                    					<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" >
+													Hết hàng
+												</button>
+											@endif
+										@else	
+											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"> 
+	                       						 <a href="{{route('loginn')}}">Add to cart <i class="fas fa-shopping-cart text-white"></i> </a> 
+	                    					</button>
 										@endif
 									</div>
 								</div>
@@ -148,13 +154,22 @@
 									</a>
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
-										<!-- Button -->
-										<!-- <a href="{{route('addcart',$index->id)}}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</a> -->
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $index->id }}">
-											Add to Cart
-										</button>
+										@if(Auth::check())
+												@if($index->status == 'Còn')
+													<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $index->id }}">
+														Add to Cart
+													</button>
+			                    					@elseif($index->status =='Hết')
+			                    					<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" >
+														Hết hàng
+													</button>
+												@endif
+											@else	
+												<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"> 
+		                       						 <a href="{{ route('loginn') }}">Add to cart </a> 
+		                    					</button>
+			                    				
+											@endif
 									</div>
 								</div>
 							</div>

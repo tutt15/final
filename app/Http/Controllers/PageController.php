@@ -8,6 +8,8 @@ use App\Product;
 use App\ProductType;
 use App\Slide;
 use App\User;
+use App\Comment;
+use App\BillDetail;
 use Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Hash;
@@ -34,7 +36,7 @@ class PageController extends Controller
 
     public function getProduct(Request $id){
         $type_home      = ProductType::all();
-        $products       = Product::paginate(9);
+        $products       = Product::paginate(15);
         return view('customer.page.product',compact('type_home','products'));
     }
 
@@ -42,8 +44,10 @@ class PageController extends Controller
         $type_home       = ProductType::all();
         $detail_product  = Product::where('id', $request->id)->get();
         $detail          = Product::where('id', $request->id)->first();
+        $comment         = Comment::where('product_id', $request->id)->get();
         $related_product = Product::where('producttype_id',$detail->producttype_id)->get();
-        return view('customer.page.productdetail', compact('type_home','detail_product','detail','related_product'));
+        $quantity_sold   = BillDetail::where('product_id', $request->id);
+        return view('customer.page.productdetail', compact('type_home','detail_product','detail','comment','related_product','quantity_sold'));
     }
 
     public function getContact(){
@@ -79,8 +83,9 @@ class PageController extends Controller
         $news           = News::where('id',$id)->get();
         $detail_product = Product::where('id', $id)->get();
         $products       = Product::all();
+        $comment        = Comment::where('id', $id)->get();
         $type_home      = ProductType::all();
-    	return view('customer.page.blogdetail',compact('news','detail_product','products','type_home'));
+    	return view('customer.page.blogdetail',compact('news','detail_product','products','comment','type_home'));
     }
 
     public function getAdmin(){
@@ -88,9 +93,30 @@ class PageController extends Controller
     }
 
    
-    public function getShowAdmin(){
-        return view('admin.homepage');
+    public function getLoginAdmin(){
+        return view('loginadmin');
     }
+
+    public function postAdmin(Request $request){
+        $this->validate($request,
+            [
+                'email'    =>'required|email',
+                'password' =>'required|min:6|max:20'
+            ],
+            [
+                'email.required'    =>'Vui lòng nhập email',
+                'email.email'       =>'Email không đúng định dạng',
+                'password.required' =>'Vui lòng nhập password',
+                'password.min'      =>'Vui lòng nhập ít nhất 6 kí tự',
+                'password.max'      =>'Mật khẩu tối đa 20 kí tự'
+            ]
+            );
+            $credentials = array('email'=>$request->email,'password'=>$request->password);
+            if(Auth::attempt(['email'=>$request->email , 'password'=>$request->password, 'role' => "admin"])) {
+                return redirect('homepage');
+            }
+    }
+
 
     public function getSearch(Request $req ){
         $type_home = ProductType::all();
@@ -160,13 +186,18 @@ class PageController extends Controller
                 return redirect('/');
             }
             elseif (Auth::attempt(['email'=>$request->email , 'password'=>$request->password, 'role'=>"admin"])) {
-                return redirect('ad');
+                return redirect('homepage');
             }
             if (Auth::attempt($credentials)) {
                 return redirect()->back()->with(['flag'=>'success','message'=>'Login successfully']);
             }else{
                 return redirect()->back()->with(['flag'=>'danger','message'=>'Login error']);
             }
+    }
+
+    public function getLogout(Request $request) {
+      Auth::logout();
+      return redirect('/loginn');
     }
 
 }

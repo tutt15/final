@@ -22,34 +22,22 @@
 			<div class="w-size14 p-t-30 respon5">
 				<div>
 					@foreach($detail_product as $detail)
-					<h4 class="product-detail-name m-text16 p-b-13">
+					<h4 class="product-detail-name m-text16 p-b-13" style="color: red;">
 						{{$detail->name}}
 					</h4>
 
 					<span class="m-text17">
 						{{number_format($detail->price)}}đ
 					</span>
+					
+					<h6 class="m-text10 p-b-13" style="font-size: 17px;"><span style="font-weight: bold;">Dạng:</span> {{$detail->unit}}</h6> 
+					<h5 class="m-text10 p-b-13" style="font-size: 17px;" ><span style="font-weight: bold;">Trạng thái:</span> {{$detail->status}}</h5>
+					<span style="font-size: 17px;">Số lượng hàng đã bán: {{ $quantity_sold->count()}}</span>
 					@endforeach
 				</div>
 
 				<!--  -->
 				<div class="p-t-33 p-b-60">
-					<div class="flex-m flex-w">
-						<div class="s-text15 w-size15 t-center">
-							Color
-						</div>
-
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="color">
-								<option>Choose an option</option>
-								<option>Gray</option>
-								<option>Red</option>
-								<option>Black</option>
-								<option>Blue</option>
-							</select>
-						</div>
-					</div>
-
 					<div class="flex-r-m flex-w p-t-10">
 						<div class="w-size16 flex-m flex-w">
 							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
@@ -66,13 +54,20 @@
 
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								@if(Auth::check())
-									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $detail->id }}">
-										Add to Cart
-									</button>
-		        					@else	
+									@if($index->status == 'Còn')
+										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $detail->id }}">
+											Add to Cart
+										</button>
+                    					@elseif($index->status =='Hết')
+                    					<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" >
+											Hết hàng
+										</button>
+									@endif
+								@else	
 									<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"> 
-		           						 <a href="{{route('login')}}">Add to cart <i class="fas fa-shopping-cart text-white"></i> </a> 
-		        					</button>
+                   						 <a href="{{ route('loginn') }}">Add to cart </a> 
+                					</button>
+                    				
 								@endif
 							</div>
 						</div>
@@ -96,14 +91,50 @@
 			</div>
 		</div>
 	</div>
+	@if(Auth::check())
+	<form action="comment/{{ $detail->id }}" method="post" class="leave-comment" role="form">
+		<input type="hidden" name="_token" value="{{csrf_token()}}">
+		<h4 class="m-text25 p-b-14">
+			Viết bình luận
+		</h4>
+		<div class="text-success">
+                    @if( session('thongbao'))
+                        {{session('thongbao')}}
+                    @endif
+                </div>
+		<textarea class="dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20" name="comment" placeholder="Viết bình luận............"></textarea>
+		<div class="w-size24">
+			<!-- Button -->
+			<button class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+				Gửi
+			</button>
+		</div>
+	</form>
+	@endif
+	<div class="row mt-3">
+        @foreach($comment as $cm)
+        <div class="col-md-9">
+            <div class="d-flex flex-row"> 
+                <div class="mr-3"> <i class="fa fa-user"></i> </div>
+                <div>
+                    <p> 
+                        <b>{{$cm->user->name}}</b> <i>{{$cm->created_at}}</i>
+                    </p>
+                    <p> {{$cm->comment}} </p>
+                    
+                </div>
+            </div>
+        </div>
+        @endforeach
+	</div>
 
-
+        
 	<!-- Relate Product -->
 	<section class="relateproduct bgwhite p-t-45 p-b-138">
 		<div class="container">
 			<div class="sec-title p-b-60">
 				<h3 class="m-text5 t-center">
-					Related Products
+					Sản phẩm liên quan
 				</h3>
 			</div>
 
@@ -126,9 +157,22 @@
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $related->id }}">
-											Add to Cart
-										</button>
+									@if(Auth::check())
+										@if($index->status == 'Còn')
+											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" role="{{ $related->id }}">
+												Add to Cart
+											</button>
+	                    					@elseif($index->status =='Hết')
+	                    					<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" >
+												Hết hàng
+											</button>
+										@endif
+									@else	
+										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"> 
+	                   						 <a href="{{ route('loginn') }}">Add to cart </a> 
+	                					</button>
+	                    				
+									@endif
 									</div>
 								</div>
 							</div>
@@ -147,7 +191,6 @@
 				@endforeach
 				</div>
 			</div>
-
 		</div>
 	</section>
 	@endsection

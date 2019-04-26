@@ -12,7 +12,8 @@
                 <th> Email </th>
                 <th> Phone_number </th>
                 <th> Address </th>
-                <th> Action </th>
+                <th> Show  </th>
+                <th> Edit  </th>
             </tr>
         </thead>
         <tbody>
@@ -25,17 +26,20 @@
                         <td> {{$user->address}} </td>
                         <td >
                         <div class="d-flex flex-row justify-content-center">
-                            <a href="{{route('users.show', $user->id)}}" title="" class="btn btn-success btn-md"><i class="fa fa-edit "></i> Xem</a>
-                            <a href="{{route('users.edit', $user->id)}}" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
-                        </div>        
+                            <a href="{{route('users.show', $user->id)}}" title="" class="btn btn-success btn-md"><i class="fa fa-th-list"></i></a>
+                        </div>  
+                            
                         </td>
+                        <td><div class="d-flex flex-row justify-content-center">
+                        	 <a href="{{route('users.edit', $user->id)}}" title="" class="btn btn-primary"><i class="fa fa-edit "></i></a>
+                        </div>  </td>
                     </tr>
                 @endforeach
           
         </tbody>
     </table>
-    <div class="row mt-4">
-                    <div class="col-md-12 d-flex justify-content-center ">
+    <div class="row mt-7" >
+                    <div class="col-md-10 d-flex justify-content-center " style="font-size: 10px;">
                         {{$users->links("pagination::bootstrap-4")}}
                     </div>
                 </div>
